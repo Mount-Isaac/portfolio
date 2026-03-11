@@ -13,8 +13,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "portfolio-isaac",
-  description: "portfolio-isaac",
+  title: "Isaac Kyalo — Senior Software Engineer & AI/ML Architect",
+  description:
+    "Isaac Kyalo — Senior Software Engineer with 5+ years building distributed systems, microservices, and production AI/ML platforms. LangChain, RAG, LLM integration, Docker, Kubernetes, FastAPI, Python.",
+  keywords: [
+    "Isaac Kyalo", "Software Engineer", "AI Engineer", "ML Engineer",
+    "LangChain", "RAG", "LLM", "FastAPI", "Python", "Microservices",
+    "Docker", "Kubernetes", "Backend Developer", "Nairobi Kenya",
+  ],
 };
 
 export default function RootLayout({

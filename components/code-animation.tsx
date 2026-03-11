@@ -3,93 +3,112 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
-const pythonCode = `
-# Django REST imports
-from rest_framework import serializers
-from rest_framework.exceptions import ValidationError
-from .models Customer
-from django.shortcuts import get_object_or_404
-from django.contrib.auth.models import User
- 
-class CustomerSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(
-        max_length=50, write_only=True, required=True
-    )
-    
-    class Meta:
-        model = Customer
-        fields = [
-            'email',  'first_name', 'last_name', 
-            'phone_number', 'password', 'image'
-        ]
-    
-    def validate(self, data):
-        if len(data['password']) < 8:
-            raise ValidationError(
-            {
-               "Password": "Password must be more than 6 characters"
-            }
-        )
-        return data
-`.trim()
+const aiCode = `# AI Agent with RAG + LangChain
+from langchain.agents import create_react_agent
+from langchain_openai import ChatOpenAI
+from langchain.tools import Tool
+from langchain_pinecone import PineconeVectorStore
+from langchain.chains import RetrievalQA
 
-const keywords = ['class', 'def', 'from', 'import', 'if', 'else', 'return']
-const builtins = ['authenticate']
+# Initialize LLM
+llm = ChatOpenAI(model="gpt-4o", temperature=0.1)
+
+# Vector store for semantic search
+vectorstore = PineconeVectorStore(
+    index_name="sports-analytics",
+    embedding=OpenAIEmbeddings()
+)
+
+# RAG retrieval chain
+retriever = vectorstore.as_retriever(
+    search_type="similarity", k=8
+)
+
+# Build autonomous AI agent
+agent = create_react_agent(
+    llm=llm,
+    tools=[
+        Tool("search_docs", retriever.invoke,
+             "Search sports analytics knowledge base"),
+        Tool("predict_value", valuation_model.run,
+             "Predict sponsorship deal value"),
+    ],
+    prompt=agent_prompt
+)
+
+# Stream agent response
+async for chunk in agent.astream({
+    "input": "Analyze Q4 sponsorship ROI"
+}):
+    yield chunk["output"]`.trim()
+
+const keywords = ['from', 'import', 'class', 'def', 'async', 'for', 'await', 'return', 'yield', 'if', 'in']
 
 export default function CodeAnimation() {
   const [currentLine, setCurrentLine] = useState(0)
-  const lines = pythonCode.split('\n')
+  const lines = aiCode.split('\n')
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentLine((prevLine) => (prevLine + 1) % lines.length)
-    }, 1000)
-
+      setCurrentLine(prev => (prev + 1) % lines.length)
+    }, 900)
     return () => clearInterval(interval)
   }, [lines.length])
 
-  const highlightSyntax = (line: string) => {
-    if (line.trim() === '') {
-      return <span className="inline-block h-4 w-full"></span>
+  const highlightLine = (line: string) => {
+    if (line.trim().startsWith('#')) {
+      return <span className="text-slate-500 italic">{line}</span>
     }
 
-    return line.split(/(\s+)/).map((part, index) => {
-      if (keywords.includes(part.trim())) {
-        return <span key={index} className="text-purple-400">{part}</span>
-      } else if (builtins.includes(part.trim())) {
-        return <span key={index} className="text-yellow-300">{part}</span>
-      } else if (part.match(/^[A-Z][A-Za-z0-9]*$/)) {
-        return <span key={index} className="text-green-400">{part}</span>
-      } else if (part.match(/^['"].*['"]$/)) {
-        return <span key={index} className="text-orange-300">{part}</span>
-      } else if (part.startsWith('#')) {
-        return <span key={index} className="text-purple-500">{part}</span>
+    const tokens = line.split(/(\s+|[()=,\[\]{}:.]|"[^"]*"|'[^']*')/)
+    return tokens.map((token, i) => {
+      if (keywords.includes(token.trim()) && token.trim() !== '') {
+        return <span key={i} className="text-purple-400 font-semibold">{token}</span>
       }
-      return <span key={index}>{part}</span>
+      if (/^["'].*["']$/.test(token)) {
+        return <span key={i} className="text-amber-300">{token}</span>
+      }
+      if (/^[A-Z][A-Za-z0-9]*$/.test(token.trim())) {
+        return <span key={i} className="text-emerald-400">{token}</span>
+      }
+      if (/^\d+$/.test(token.trim())) {
+        return <span key={i} className="text-orange-400">{token}</span>
+      }
+      if (['langchain', 'openai', 'pinecone', 'langchain_openai', 'langchain_pinecone'].some(p => token.includes(p))) {
+        return <span key={i} className="text-lime-400">{token}</span>
+      }
+      return <span key={i} className="text-slate-300">{token}</span>
     })
   }
 
   return (
-    <div className="bg-gray-900 rounded-lg p-4 sm:p-6 font-mono text-xs sm:text-sm w-full max-w-full sm:max-w-md md:max-w-lg lg:max-w-xl mx-auto mt-8 lg:mt-0" style={{borderRadius: 6, overflowX: 'hidden', maxHeight: 'calc(100vh - 200px)'}}>
-      <div className="mb-4 flex items-center space-x-2">
-        <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-red-500"></div>
-        <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-yellow-500"></div>
-        <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-green-500"></div>
-        <span className="text-gray-400 ml-2 text-xs sm:text-sm">Django authentication</span>
+    <div className="bg-[#0d1117] rounded-xl p-4 sm:p-5 font-mono text-xs w-full max-w-xl mx-auto border border-white/10 shadow-2xl">
+      {/* Window chrome */}
+      <div className="mb-4 flex items-center gap-2">
+        <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
+        <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+        <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
+        <span className="text-slate-500 ml-3 text-xs">ai_agent.py</span>
+        <span className="ml-auto text-xs text-lime-500/70 animate-pulse">● running</span>
       </div>
-      <div className="bg-black bg-opacity-50 p-2 sm:p-4 rounded-md overflow-x-auto" style={{overflowX: 'hidden'}}>
-        <pre className="text-white">
+
+      {/* Code */}
+      <div className="overflow-x-hidden overflow-y-hidden max-h-[380px]">
+        <pre className="text-white leading-6">
           {lines.map((line, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0.5 }}
-              animate={{ 
-                opacity: index === currentLine ? 1 : 0.5,
-                backgroundColor: index === currentLine ? 'rgba(59, 130, 246, 0.2)' : 'transparent'
+              animate={{
+                opacity: index === currentLine ? 1 : index < currentLine ? 0.55 : 0.3,
+                backgroundColor: index === currentLine ? 'rgba(132, 204, 22, 0.08)' : 'transparent',
               }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.25 }}
+              className="px-1 rounded"
             >
-              {highlightSyntax(line)}
+              <span className="text-slate-600 mr-3 select-none text-[10px]">
+                {String(index + 1).padStart(2, ' ')}
+              </span>
+              {highlightLine(line)}
             </motion.div>
           ))}
         </pre>
@@ -97,4 +116,3 @@ export default function CodeAnimation() {
     </div>
   )
 }
-

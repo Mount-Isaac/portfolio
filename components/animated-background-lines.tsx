@@ -3,13 +3,13 @@
 import { useEffect, useRef } from 'react'
 
 const tools = [
-  'React', 'Next.js', 'TypeScript', 'Python', 'Django', 'TensorFlow',
-  'PyTorch', 'SQL', 'MongoDB', 'GraphQL', 'Docker', 'Kubernetes',
-  'Git', 'CI/CD', 'AWS', 'Azure', 'GCP', 'Redux', 'Vue', 'Angular',
-  'Node.js', 'Express', 'Flask', 'FastAPI', 'Pandas', 'NumPy',
-  'Scikit-learn', 'Matplotlib', 'D3.js', 'Three.js', 'WebGL',
-  'Sass', 'Tailwind CSS', 'Bootstrap', 'Webpack', 'Babel',
-  'Jest', 'Cypress', 'Selenium', 'RESTful API', 'WebSockets'
+  'LangChain', 'LlamaIndex', 'GPT-4', 'Claude API', 'RAG', 'LLM',
+  'FastAPI', 'Flask', 'Django', 'Python', 'Node.js', 'TypeScript',
+  'Docker', 'Kubernetes', 'RabbitMQ', 'Kafka', 'Redis', 'PostgreSQL',
+  'MLflow', 'Pinecone', 'Databricks', 'Hugging Face', 'AI Agents',
+  'AWS', 'GCP', 'CI/CD', 'Jenkins', 'Terraform', 'Microservices',
+  'React', 'Next.js', 'GraphQL', 'WebSockets', 'Embeddings', 'Vector DB',
+  'MongoDB', 'Celery', 'Prompt Engineering', 'Fine-Tuning', 'NumPy',
 ]
 
 export default function AnimatedBackgroundLines() {
@@ -31,7 +31,7 @@ export default function AnimatedBackgroundLines() {
     window.addEventListener('resize', resizeCanvas)
 
     const particles: Particle[] = []
-    const particleCount = 100
+    const particleCount = 55
 
     class Particle {
       x: number
@@ -45,11 +45,11 @@ export default function AnimatedBackgroundLines() {
       constructor(canvasWidth: number, canvasHeight: number) {
         this.x = Math.random() * canvasWidth
         this.y = Math.random() * canvasHeight
-        this.size = Math.random() * 20 + 5
-        this.speedX = Math.random() * 0.9
-        this.speedY = Math.random() * 0.9
-        this.content = tools[Math.floor(Math.random() * tools.length)] 
-        this.color = `hsl(${Math.random() * 360}, 25%, 25%)`
+        this.size = Math.random() * 7 + 7
+        this.speedX = (Math.random() - 0.5) * 0.22
+        this.speedY = Math.random() * 0.18 + 0.04
+        this.content = tools[Math.floor(Math.random() * tools.length)]
+        this.color = `rgba(255,255,255,${(Math.random() * 0.07 + 0.04).toFixed(2)})`
       }
 
       update(canvasWidth: number, canvasHeight: number) {
@@ -78,14 +78,14 @@ export default function AnimatedBackgroundLines() {
       
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-      // Draw curved lines
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)'
-      ctx.lineWidth = 2
-      for (let i = 0; i < 5; i++) {
+      // Draw curved lines — subtle, slow
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.035)'
+      ctx.lineWidth = 1
+      for (let i = 0; i < 4; i++) {
         ctx.beginPath()
-        ctx.moveTo(0, canvas.height * (i / 5 + Math.sin(Date.now() * 0.001 + i) * 0.1))
-        for (let x = 0; x < canvas.width; x += 10) {
-          ctx.lineTo(x, canvas.height * (i / 5 + Math.sin(Date.now() * 0.001 + i + x * 0.01) * 0.1))
+        ctx.moveTo(0, canvas.height * (i / 4 + Math.sin(Date.now() * 0.00025 + i) * 0.07))
+        for (let x = 0; x < canvas.width; x += 12) {
+          ctx.lineTo(x, canvas.height * (i / 4 + Math.sin(Date.now() * 0.00025 + i + x * 0.006) * 0.07))
         }
         ctx.stroke()
       }
