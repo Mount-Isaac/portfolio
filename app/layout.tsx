@@ -13,13 +13,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Isaac Kyalo — Senior Software Engineer & AI/ML Architect",
+  title: "Isaac Kyalo — Full-Stack Engineer · AI Integration & Microservices",
   description:
-    "Isaac Kyalo — Senior Software Engineer with 5+ years building distributed systems, microservices, and production AI/ML platforms. LangChain, RAG, LLM integration, Docker, Kubernetes, FastAPI, Python.",
+    "Isaac Kyalo — Full-stack engineer with 5+ years building decoupled applications, distributed systems, and AI-integrated architectures. Next.js, FastAPI, RabbitMQ, Kafka, LangChain, MCP, Docker. Based in Nairobi, open to remote.",
   keywords: [
-    "Isaac Kyalo", "Software Engineer", "AI Engineer", "ML Engineer",
-    "LangChain", "RAG", "LLM", "FastAPI", "Python", "Microservices",
-    "Docker", "Kubernetes", "Backend Developer", "Nairobi Kenya",
+    "Isaac Kyalo", "Software Engineer", "Backend Engineer", "AI Engineer",
+    "LangChain", "MCP", "RAG", "FastAPI", "Python", "Microservices",
+    "RabbitMQ", "Kafka", "Docker", "Grafana", "Prometheus", "Nairobi Kenya",
   ],
 };
 

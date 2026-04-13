@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { Download, ExternalLink, Mail, ArrowUpRight, Package, Terminal, Layers, Cpu, Database, Cloud, Code2, Bot, Zap, Shield } from 'lucide-react'
+import { Download, ExternalLink, Mail, ArrowUpRight, Package, Terminal, Layers, Cpu, Database, Cloud, Code2, BrainCircuit, Zap, BarChart2 } from 'lucide-react'
 import { FaGithub, FaTwitter, FaDiscord, FaTelegram, FaWhatsapp } from 'react-icons/fa'
 import AnimatedBackgroundLines from '@/components/animated-background-lines'
 import CodeAnimation from '@/components/code-animation'
@@ -38,12 +38,12 @@ function SectionTitle({ label, title, subtitle }: { label: string; title: string
 /* ─────────────────── data ─────────────────── */
 const skillGroups = [
   {
-    icon: Bot,
+    icon: BrainCircuit,
     label: 'AI / LLM Engineering',
     color: 'text-lime-400',
     border: 'border-lime-400/20',
     bg: 'bg-lime-400/5',
-    skills: ['LangChain', 'LlamaIndex', 'OpenAI API', 'Anthropic Claude', 'Gemini API', 'GPT-4', 'LLaMA', 'RAG Pipelines', 'AI Agents', 'Multi-Agent Systems', 'Prompt Engineering', 'Fine-Tuning', 'Embeddings', 'Vector Search'],
+    skills: ['LangChain', 'OpenAI API', 'Anthropic Claude', 'MCP (Model Context Protocol)', 'RAG Pipelines', 'AI Agents', 'RLHF / Model Deployment', 'Prompt Engineering', 'Embeddings', 'Vector Search'],
   },
   {
     icon: Cpu,
@@ -51,7 +51,7 @@ const skillGroups = [
     color: 'text-purple-400',
     border: 'border-purple-400/20',
     bg: 'bg-purple-400/5',
-    skills: ['MLflow', 'Hugging Face', 'Databricks', 'Pinecone', 'ChromaDB', 'Weaviate', 'Model Versioning', 'Inference Optimization', 'Feature Engineering', 'AWS SageMaker', 'GCP Vertex AI'],
+    skills: ['MLflow', 'Hugging Face', 'Pinecone', 'ChromaDB', 'Model Versioning', 'Inference Optimization', 'Feature Engineering', 'AWS SageMaker'],
   },
   {
     icon: Code2,
@@ -59,7 +59,7 @@ const skillGroups = [
     color: 'text-blue-400',
     border: 'border-blue-400/20',
     bg: 'bg-blue-400/5',
-    skills: ['Python', 'FastAPI', 'Flask', 'Django', 'Node.js', 'Express', 'REST APIs', 'GraphQL', 'WebSockets', 'gRPC', 'OAuth2', 'JWT', 'Microservices'],
+    skills: ['Python', 'TypeScript', 'FastAPI', 'Django', 'Flask', 'Node.js', 'Express', 'REST APIs', 'WebSockets', 'OAuth2', 'JWT', 'Microservices'],
   },
   {
     icon: Cloud,
@@ -67,7 +67,7 @@ const skillGroups = [
     color: 'text-cyan-400',
     border: 'border-cyan-400/20',
     bg: 'bg-cyan-400/5',
-    skills: ['AWS (EC2 · S3 · RDS · Lambda)', 'GCP', 'Docker', 'Kubernetes', 'Docker Swarm', 'Jenkins', 'GitHub Actions', 'Terraform', 'Nginx', 'CI/CD', 'Blue-Green Deploy'],
+    skills: ['AWS (EC2 · S3 · RDS · Lambda)', 'GCP', 'Docker', 'Kubernetes', 'Docker Swarm', 'Jenkins', 'GitHub Actions', 'Nginx', 'CI/CD', 'Blue-Green Deploy'],
   },
   {
     icon: Database,
@@ -75,7 +75,7 @@ const skillGroups = [
     color: 'text-orange-400',
     border: 'border-orange-400/20',
     bg: 'bg-orange-400/5',
-    skills: ['PostgreSQL', 'MySQL', 'MongoDB', 'Redis', 'InfluxDB', 'Connection Pooling', 'Query Optimization', 'Raw SQL', 'NoSQL', 'Vector Databases'],
+    skills: ['PostgreSQL', 'MySQL', 'MongoDB', 'Redis', 'InfluxDB', 'Connection Pooling', 'Query Optimization', 'Raw SQL', 'Vector Databases'],
   },
   {
     icon: Zap,
@@ -85,46 +85,55 @@ const skillGroups = [
     bg: 'bg-yellow-400/5',
     skills: ['RabbitMQ', 'Apache Kafka', 'Celery', 'Event-Driven Architecture', 'Pub/Sub', 'Dead-Letter Queues', 'Message Brokers', 'Async Processing'],
   },
+  {
+    icon: BarChart2,
+    label: 'Data & Observability',
+    color: 'text-rose-400',
+    border: 'border-rose-400/20',
+    bg: 'bg-rose-400/5',
+    skills: ['Grafana', 'Prometheus', 'Apache Superset', 'InfluxDB', 'Metrics & Alerting', 'Log Aggregation', 'Dashboards', 'Data Visualization'],
+  },
 ]
 
 const architectureProjects = [
   {
-    title: 'AI-Powered Sports Analytics Engine',
+    title: 'AI-Powered Data Analytics Engine',
     description:
-      'End-to-end ML platform processing millions of sports data points. Integrated GPT-4 & Claude APIs for natural language querying, built RAG pipelines with LangChain + Pinecone for semantic search over proprietary datasets, and productionized predictive models for sponsorship valuation.',
-    metrics: ['1M+ records in vector DB', 'Real-time ML inference', '5+ models in production'],
-    stack: ['LangChain', 'Pinecone', 'GPT-4', 'Databricks', 'MLflow', 'FastAPI', 'Python'],
+      'Integrated LLM APIs (OpenAI + Anthropic) into an analytics platform to enable natural language querying over proprietary datasets. Built RAG pipelines with LangChain and Pinecone for semantic search, wired AI outputs into existing REST APIs, and set up the inference infrastructure to keep it reliable in production.',
+    metrics: ['LLM-integrated queries', 'RAG over proprietary data', 'Semantic search API'],
+    stack: ['LangChain', 'Pinecone', 'OpenAI API', 'Anthropic API', 'FastAPI', 'Python', 'MLflow'],
     accentColor: 'lime',
     architecture: [
-      { label: 'Sports Data Sources', color: 'bg-slate-700' },
-      { label: 'Databricks Pipeline', color: 'bg-purple-800' },
-      { label: 'ML Models (MLflow)', color: 'bg-indigo-800' },
+      { label: 'Client / Dashboard', color: 'bg-slate-700' },
+      { label: 'FastAPI REST Layer', color: 'bg-blue-800' },
       { label: 'LangChain + RAG', color: 'bg-lime-800' },
       { label: 'Pinecone VectorDB', color: 'bg-emerald-800' },
-      { label: 'FastAPI REST', color: 'bg-blue-800' },
+      { label: 'OpenAI / Anthropic API', color: 'bg-indigo-800' },
+      { label: 'Response to Client', color: 'bg-slate-700' },
     ],
   },
   {
-    title: 'High-Scale IoT Device Control Platform',
+    title: 'IoT Device Control Platform',
     description:
-      'Mission-critical distributed platform managing 100,000+ connected mobile devices across multiple OEM partners. Built 10+ independent microservices with Redis caching cutting DB load by 90%, RabbitMQ for guaranteed message delivery, and Docker Swarm blue-green deployments for zero-downtime releases.',
-    metrics: ['100K+ devices', '99.99% uptime SLA', 'sub-100ms response'],
-    stack: ['FastAPI', 'Flask', 'Redis', 'RabbitMQ', 'PostgreSQL', 'Docker Swarm', 'Jenkins'],
+      'Distributed platform managing a large fleet of connected mobile devices across multiple partner networks. Built decoupled microservices with Redis caching to reduce DB load, RabbitMQ for guaranteed message delivery, and Docker Swarm blue-green deployments for zero-downtime releases. Monitored with Grafana and Prometheus dashboards.',
+    metrics: ['Multi-partner device fleet', 'Zero-downtime deploys', 'Sub-100ms response'],
+    stack: ['FastAPI', 'Flask', 'Redis', 'RabbitMQ', 'PostgreSQL', 'Docker Swarm', 'Grafana', 'Prometheus', 'Jenkins'],
     accentColor: 'blue',
     architecture: [
-      { label: 'Mobile Devices (OEMs)', color: 'bg-slate-700' },
+      { label: 'Connected Devices', color: 'bg-slate-700' },
       { label: 'FastAPI Gateway', color: 'bg-blue-800' },
       { label: 'Redis Cache', color: 'bg-red-800' },
       { label: 'RabbitMQ Broker', color: 'bg-orange-800' },
-      { label: 'Worker Services', color: 'bg-purple-800' },
+      { label: 'Worker Microservices', color: 'bg-purple-800' },
       { label: 'PostgreSQL Cluster', color: 'bg-cyan-800' },
+      { label: 'Grafana + Prometheus', color: 'bg-rose-900' },
     ],
   },
   {
     title: 'Fintech Payment API Infrastructure',
     description:
-      'Secure, OWASP-compliant payment processing backend with end-to-end encryption, real-time transaction monitoring, and fraud detection. Handles high-volume concurrent payment flows with event-driven processing and comprehensive audit trails.',
-    metrics: ['End-to-end encrypted', 'Real-time monitoring', 'OWASP compliant'],
+      'Secure, OWASP-compliant payment processing backend with end-to-end encryption, real-time transaction monitoring, and event-driven fraud detection. Decoupled into independent services communicating via async queues with comprehensive audit trails and zero shared state between services.',
+    metrics: ['End-to-end encrypted', 'Event-driven processing', 'OWASP compliant'],
     stack: ['FastAPI', 'PostgreSQL', 'Redis', 'Celery', 'Docker', 'AWS', 'GitHub Actions'],
     accentColor: 'purple',
     architecture: [
@@ -134,6 +143,23 @@ const architectureProjects = [
       { label: 'Celery Workers', color: 'bg-yellow-800' },
       { label: 'Real-time Monitor', color: 'bg-orange-800' },
       { label: 'PostgreSQL Ledger', color: 'bg-blue-800' },
+    ],
+  },
+  {
+    title: 'MCP-Powered AI Customer Support Assistant',
+    description:
+      'Conversational support assistant where user messages route through an MCP server that discovers and selects the right agent for the task. The selected agent calls account/card info APIs via MCP tool calls, passes through an auth guard (JWT), and the LLM synthesizes a contextual response. Built as a decoupled Next.js frontend with a FastAPI backend — no hardcoded tool logic, fully agent-driven.',
+    metrics: ['MCP dynamic tool routing', 'Auth-guarded API calls', 'Multi-turn context'],
+    stack: ['LangChain', 'MCP', 'FastAPI', 'OpenAI API', 'JWT / OAuth2', 'Redis', 'Next.js', 'PostgreSQL'],
+    accentColor: 'cyan',
+    architecture: [
+      { label: 'Chat UI (Next.js)', color: 'bg-slate-700' },
+      { label: 'FastAPI Backend', color: 'bg-blue-800' },
+      { label: 'MCP Server (Agent Router)', color: 'bg-cyan-800' },
+      { label: 'Available Agents Discovery', color: 'bg-teal-800' },
+      { label: 'Card / Account Info API', color: 'bg-green-800' },
+      { label: 'Auth Guard (JWT)', color: 'bg-red-800' },
+      { label: 'LLM Response (OpenAI)', color: 'bg-indigo-800' },
     ],
   },
 ]
@@ -183,7 +209,6 @@ const openSourcePackages = [
 const stats = [
   { value: '5+', label: 'Years Experience' },
   { value: '30+', label: 'Projects Delivered' },
-  { value: '100K+', label: 'Devices Managed' },
   { value: '2', label: 'Open Source Packages' },
 ]
 
@@ -201,8 +226,8 @@ export default function Home() {
         <AnimatedBackgroundLines />
 
         {/* gradient blobs */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-lime-500/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-lime-500/8 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/8 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative max-w-7xl mx-auto px-6 py-32 flex flex-col lg:flex-row items-center gap-16 w-full">
           {/* Left */}
@@ -222,13 +247,14 @@ export default function Home() {
                 </span>
               </h1>
 
-              <p className="text-lg sm:text-xl md:text-2xl text-transparent bg-clip-text bg-gradient-to-r from-lime-400 via-cyan-400 to-blue-400 font-semibold mb-4">
-                Senior Software Engineer · AI/ML Architect
+              <p className="text-lg sm:text-xl md:text-2xl text-lime-400 font-semibold mb-4 tracking-tight">
+                Full-Stack Engineer · AI Integration & Microservices
               </p>
 
               <p className="text-slate-400 text-base leading-relaxed max-w-lg mx-auto lg:mx-0 mb-10">
-                5+ years building production-grade distributed systems, microservices, and AI-powered platforms.
-                From 100K-device IoT infrastructure to LLM-driven analytics engines — I ship systems that scale.
+                5+ years building full-stack applications and distributed systems — decoupled frontends,
+                microservices backends, event-driven pipelines, and AI integration layers.
+                Open to remote opportunities.
               </p>
 
               <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
@@ -279,8 +305,8 @@ export default function Home() {
       </section>
 
       {/* ══════ STATS BAR ══════ */}
-      <section className="border-y border-white/8 bg-white/2">
-        <div className="max-w-5xl mx-auto px-6 py-10 grid grid-cols-2 md:grid-cols-4 gap-8">
+      <section className="border-y border-slate-800 bg-[#0d1117]">
+        <div className="max-w-4xl mx-auto px-6 py-10 grid grid-cols-3 gap-8">
           {stats.map((s, i) => (
             <FadeIn key={s.label} delay={i * 0.1} className="text-center">
               <div className="text-3xl md:text-4xl font-bold text-lime-400 mb-1">{s.value}</div>
@@ -295,8 +321,8 @@ export default function Home() {
         <FadeIn>
           <SectionTitle
             label="About me"
-            title="Engineer. Builder. AI Systems Architect."
-            subtitle="I don't just write code — I design systems that handle real-world scale, reliability, and intelligence."
+            title="Full-Stack Engineer · AI Integration Specialist"
+            subtitle="I build complete products — decoupled frontends, microservices backends, and AI integration layers wired into real production systems."
           />
         </FadeIn>
 
@@ -304,31 +330,31 @@ export default function Home() {
           <FadeIn delay={0.1}>
             <div className="space-y-5 text-slate-300 leading-relaxed">
               <p>
-                I am a Senior Software Engineer and AI/ML Architect with 5+ years building production systems
-                from the ground up. My work spans IoT device management platforms handling 100K+ concurrent
-                devices, fintech payment APIs, and LLM-powered analytics engines used by sports organizations across the US.
+                Full-stack engineer with 5+ years building production applications end-to-end — React and Next.js
+                frontends, FastAPI, Django, Flask, Express, and Node.js backends in Python and TypeScript, and
+                distributed systems that keep services decoupled and independently scalable. I have shipped many
+                projects across fintech, IoT, analytics, and e-commerce.
               </p>
               <p>
-                I specialize in the full AI stack — from training and fine-tuning models to deploying RAG pipelines,
-                autonomous AI agents, and LLM-integrated APIs in production. I work with LangChain, LlamaIndex,
-                OpenAI, and Anthropic APIs daily, and I understand the infrastructure that makes AI reliable at scale.
+                On the AI side, my focus is integration and architecture — not training models but wiring LLMs,
+                agents, and tools into real systems using LangChain, MCP (Model Context Protocol), RAG pipelines,
+                and OpenAI / Anthropic APIs. I build the infrastructure that makes AI features reliable in production.
               </p>
               <p>
-                On the infrastructure side, I have designed microservices architectures with Docker/Kubernetes,
-                built fault-tolerant message queuing systems with RabbitMQ and Kafka, and engineered
-                CI/CD pipelines that reduced release cycles by 70%. I am a published open-source contributor
-                with Python packages used by developers globally.
+                For async systems I use RabbitMQ and Kafka. For observability: Grafana, Prometheus, and Superset.
+                Infrastructure lives in Docker, Kubernetes, and AWS. I have published two open-source Python
+                packages on PyPI that solve real problems in microservice deployments.
               </p>
             </div>
 
             <div className="grid grid-cols-2 gap-4 mt-8">
               {[
-                { icon: Bot, label: 'AI Agent Systems', desc: 'LangChain · RAG · LLMs' },
-                { icon: Layers, label: 'Microservices', desc: 'Docker · K8s · RabbitMQ' },
-                { icon: Shield, label: 'Fintech APIs', desc: 'Secure · Encrypted · PCI' },
-                { icon: Zap, label: 'High Performance', desc: 'Sub-100ms · 99.99% SLA' },
+                { icon: Code2, label: 'Full-Stack Apps', desc: 'React · Next.js · Django · Express' },
+                { icon: BrainCircuit, label: 'AI Integration', desc: 'LangChain · MCP · RAG' },
+                { icon: Layers, label: 'Microservices', desc: 'Docker · RabbitMQ · Kafka' },
+                { icon: Zap, label: 'Observability', desc: 'Grafana · Prometheus · Superset' },
               ].map(card => (
-                <div key={card.label} className="bg-white/4 border border-white/8 rounded-xl p-4 hover:border-lime-400/30 transition-colors">
+                <div key={card.label} className="bg-[#0d1117] border border-slate-800 rounded-xl p-4 hover:border-lime-400/40 transition-colors">
                   <card.icon className="w-5 h-5 text-lime-400 mb-2" />
                   <div className="text-white text-sm font-semibold">{card.label}</div>
                   <div className="text-slate-500 text-xs mt-0.5">{card.desc}</div>
@@ -340,34 +366,24 @@ export default function Home() {
           <FadeIn delay={0.2}>
             <div className="space-y-3">
               {[
-                { label: 'AI/ML & LLM Integration', pct: 92 },
-                { label: 'Backend & API Development', pct: 96 },
-                { label: 'DevOps & Cloud Infrastructure', pct: 88 },
-                { label: 'Distributed Systems Design', pct: 90 },
-                { label: 'Database Architecture', pct: 89 },
-              ].map((bar, i) => (
-                <div key={bar.label}>
-                  <div className="flex justify-between text-sm mb-1.5">
-                    <span className="text-slate-300">{bar.label}</span>
-                    <span className="text-slate-500">{bar.pct}%</span>
-                  </div>
-                  <div className="h-1.5 bg-white/8 rounded-full overflow-hidden">
-                    <motion.div
-                      className="h-full bg-gradient-to-r from-lime-500 to-cyan-500 rounded-full"
-                      initial={{ width: 0 }}
-                      whileInView={{ width: `${bar.pct}%` }}
-                      transition={{ duration: 1, delay: i * 0.1, ease: 'easeOut' }}
-                      viewport={{ once: true }}
-                    />
-                  </div>
+                { label: 'Full-Stack Application Development', note: 'Next.js, FastAPI, Node.js' },
+                { label: 'Distributed Systems & Microservices', note: 'RabbitMQ, Kafka, decoupled arch' },
+                { label: 'AI Integration & Agent Architecture', note: 'LangChain, MCP, RAG — not model training' },
+                { label: 'DevOps & Observability', note: 'Docker, Grafana, Prometheus' },
+                { label: 'Database Design', note: 'PostgreSQL, Redis, Vector DBs' },
+                { label: 'Model Deployment / RLHF', note: 'Active learning area' },
+              ].map((item) => (
+                <div key={item.label} className="flex items-center justify-between py-2.5 border-b border-white/6">
+                  <span className="text-slate-300 text-sm">{item.label}</span>
+                  <span className="text-xs text-slate-400 bg-[#0d1117] border border-slate-700 px-2.5 py-1 rounded-full">{item.note}</span>
                 </div>
               ))}
 
               {/* Quick facts */}
-              <div className="mt-8 bg-white/3 border border-white/8 rounded-xl p-5 space-y-3">
+              <div className="mt-8 bg-[#0d1117] border border-slate-800 rounded-xl p-5 space-y-3">
                 {[
                   ['Location', 'Nairobi, Kenya (Open to Remote)'],
-                  ['Currently', 'Senior Engineer @ SportsBiz (USA)'],
+                  ['Currently', 'Full-Stack / AI Integration Engineer'],
                   ['Education', "B.Sc. Information Technology, Kenyatta University"],
                   ['Contact', 'isadechair019@gmail.com'],
                 ].map(([k, v]) => (
@@ -383,13 +399,13 @@ export default function Home() {
       </section>
 
       {/* ══════ SKILLS ══════ */}
-      <section id="skills" className="bg-white/2 border-y border-white/6 py-24">
+      <section id="skills" className="bg-[#0d1117] border-y border-slate-800 py-24">
         <div className="max-w-7xl mx-auto px-6">
           <FadeIn>
             <SectionTitle
               label="Technical skills"
               title="Full-Stack AI & Systems Engineering"
-              subtitle="From LLM agents and RAG pipelines to bare-metal Docker Swarm clusters — I operate across the entire stack."
+              subtitle="The tools and technologies I use on real projects — backend, AI/LLM, infrastructure, messaging, and observability."
             />
           </FadeIn>
 
@@ -405,7 +421,7 @@ export default function Home() {
                     {group.skills.map(skill => (
                       <span
                         key={skill}
-                        className="text-xs bg-white/6 text-slate-300 border border-white/8 px-2.5 py-1 rounded-md hover:border-white/20 transition-colors"
+                        className="text-xs bg-[#161b22] text-slate-300 border border-slate-700/70 px-2.5 py-1 rounded-md hover:border-slate-500 transition-colors"
                       >
                         {skill}
                       </span>
@@ -433,7 +449,8 @@ export default function Home() {
           <div className="space-y-8 mb-20">
             {architectureProjects.map((proj, i) => (
               <FadeIn key={proj.title} delay={i * 0.1}>
-                <div className="bg-white/3 border border-white/8 rounded-2xl p-7 hover:border-white/15 transition-all group">
+                <div className="bg-[#0d1117] border border-slate-800 rounded-2xl p-7 hover:border-slate-600 transition-all group relative overflow-hidden">
+                  <div className={`absolute left-0 top-0 bottom-0 w-1 rounded-l-2xl ${i === 0 ? 'bg-lime-500' : i === 1 ? 'bg-blue-500' : i === 2 ? 'bg-purple-500' : 'bg-cyan-500'}`} />
                   <div className="flex flex-col lg:flex-row gap-8">
                     {/* Info */}
                     <div className="flex-1">
@@ -450,7 +467,7 @@ export default function Home() {
                       <p className="text-slate-400 text-sm leading-relaxed mb-5">{proj.description}</p>
                       <div className="flex flex-wrap gap-2">
                         {proj.stack.map(t => (
-                          <span key={t} className="text-xs bg-white/6 border border-white/10 text-slate-300 px-2.5 py-1 rounded-md">
+                          <span key={t} className="text-xs bg-[#161b22] border border-slate-700/70 text-slate-300 px-2.5 py-1 rounded-md">
                             {t}
                           </span>
                         ))}
@@ -467,7 +484,7 @@ export default function Home() {
                               {node.label}
                             </div>
                             {ni < proj.architecture.length - 1 && (
-                              <div className="text-slate-600 text-xs">↓</div>
+                              <div className="text-slate-500 text-xs">↓</div>
                             )}
                           </div>
                         ))}
@@ -495,7 +512,7 @@ export default function Home() {
                   href={proj.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block bg-white/3 border border-white/8 rounded-2xl p-6 hover:border-white/20 hover:bg-white/5 transition-all group h-full"
+                  className="block bg-[#0d1117] border border-slate-800 rounded-2xl p-6 hover:border-slate-600 hover:bg-[#111827] transition-all group h-full"
                 >
                   <div className="flex items-start justify-between mb-3">
                     <h4 className="text-base font-bold text-white">{proj.title}</h4>
@@ -504,7 +521,7 @@ export default function Home() {
                   <p className="text-slate-400 text-sm leading-relaxed mb-4">{proj.description}</p>
                   <div className="flex flex-wrap gap-1.5">
                     {proj.stack.map(t => (
-                      <span key={t} className="text-xs bg-white/6 border border-white/8 text-slate-400 px-2 py-0.5 rounded">
+                      <span key={t} className="text-xs bg-[#161b22] border border-slate-700/70 text-slate-400 px-2 py-0.5 rounded">
                         {t}
                       </span>
                     ))}
@@ -517,7 +534,7 @@ export default function Home() {
       </section>
 
       {/* ══════ OPEN SOURCE ══════ */}
-      <section id="opensource" className="bg-white/2 border-y border-white/6 py-24">
+      <section id="opensource" className="bg-[#0d1117] border-y border-slate-800 py-24">
         <div className="max-w-5xl mx-auto px-6">
           <FadeIn>
             <SectionTitle
@@ -530,16 +547,16 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-7">
             {openSourcePackages.map((pkg, i) => (
               <FadeIn key={pkg.name} delay={i * 0.15}>
-                <div className="bg-[#0d1117] border border-white/10 rounded-2xl p-6 hover:border-lime-400/30 transition-all h-full flex flex-col">
+                <div className="bg-[#0d1117] border border-slate-800 rounded-2xl p-6 hover:border-lime-400/40 transition-all h-full flex flex-col">
                   <div className="flex items-start justify-between mb-4">
                     <h3 className="text-base font-bold text-white font-mono">{pkg.name}</h3>
                     <div className="flex gap-2">
                       <a href={pkg.github} target="_blank" rel="noopener noreferrer"
-                        className="p-2 rounded-lg bg-white/6 hover:bg-white/12 transition-colors text-slate-400 hover:text-white">
+                        className="p-2 rounded-lg bg-[#161b22] border border-slate-700/60 hover:border-slate-500 transition-colors text-slate-400 hover:text-white">
                         <FaGithub className="w-4 h-4" />
                       </a>
                       <a href={pkg.pypi} target="_blank" rel="noopener noreferrer"
-                        className="p-2 rounded-lg bg-white/6 hover:bg-white/12 transition-colors text-slate-400 hover:text-lime-400">
+                        className="p-2 rounded-lg bg-[#161b22] border border-slate-700/60 hover:border-slate-500 transition-colors text-slate-400 hover:text-lime-400">
                         <Package className="w-4 h-4" />
                       </a>
                     </div>
@@ -548,14 +565,14 @@ export default function Home() {
                   <p className="text-slate-400 text-sm leading-relaxed mb-5 flex-1">{pkg.description}</p>
 
                   {/* Install command */}
-                  <div className="bg-black/50 border border-white/8 rounded-lg px-4 py-2.5 font-mono text-xs text-lime-400 flex items-center gap-2 mb-4">
+                  <div className="bg-[#070a10] border border-slate-700/50 rounded-lg px-4 py-2.5 font-mono text-xs text-lime-400 flex items-center gap-2 mb-4">
                     <Terminal className="w-3.5 h-3.5 text-slate-500 shrink-0" />
                     {pkg.install}
                   </div>
 
                   <div className="flex flex-wrap gap-2">
                     {pkg.tags.map(t => (
-                      <span key={t} className="text-xs bg-white/6 border border-white/8 text-slate-400 px-2 py-0.5 rounded">
+                      <span key={t} className="text-xs bg-[#161b22] border border-slate-700/70 text-slate-400 px-2 py-0.5 rounded">
                         {t}
                       </span>
                     ))}
@@ -579,7 +596,7 @@ export default function Home() {
           </FadeIn>
 
           <FadeIn delay={0.15}>
-            <div className="bg-white/3 border border-white/10 rounded-2xl p-8 mb-8">
+            <div className="bg-[#0d1117] border border-slate-800 rounded-2xl p-8 mb-8">
               <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
                 <a
                   href="mailto:isadechair019@gmail.com"
@@ -629,8 +646,8 @@ export default function Home() {
       </section>
 
       {/* ══════ FOOTER ══════ */}
-      <footer className="border-t border-white/6 py-6 text-center">
-        <p className="text-slate-600 text-xs">
+      <footer className="border-t border-slate-800 py-6 text-center">
+        <p className="text-slate-500 text-xs">
           © {new Date().getFullYear()} Isaac Kyalo · Nairobi, Kenya · Built with Next.js & Tailwind
         </p>
       </footer>

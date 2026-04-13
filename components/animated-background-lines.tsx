@@ -3,13 +3,12 @@
 import { useEffect, useRef } from 'react'
 
 const tools = [
-  'LangChain', 'LlamaIndex', 'GPT-4', 'Claude API', 'RAG', 'LLM',
-  'FastAPI', 'Flask', 'Django', 'Python', 'Node.js', 'TypeScript',
-  'Docker', 'Kubernetes', 'RabbitMQ', 'Kafka', 'Redis', 'PostgreSQL',
-  'MLflow', 'Pinecone', 'Databricks', 'Hugging Face', 'AI Agents',
-  'AWS', 'GCP', 'CI/CD', 'Jenkins', 'Terraform', 'Microservices',
-  'React', 'Next.js', 'GraphQL', 'WebSockets', 'Embeddings', 'Vector DB',
-  'MongoDB', 'Celery', 'Prompt Engineering', 'Fine-Tuning', 'NumPy',
+  'FastAPI', 'Python', 'RabbitMQ', 'Apache Kafka', 'Redis', 'PostgreSQL',
+  'LangChain', 'MCP', 'RAG', 'RLHF', 'AI Agents', 'Claude API', 'OpenAI',
+  'Docker', 'Kubernetes', 'Docker Swarm', 'Nginx', 'CI/CD', 'GitHub Actions',
+  'Grafana', 'Prometheus', 'Superset', 'InfluxDB', 'MLflow', 'Pinecone',
+  'AWS', 'GCP', 'Microservices', 'WebSockets', 'OAuth2', 'Celery',
+  'MongoDB', 'ChromaDB', 'Vector DB', 'Embeddings', 'Node.js', 'Next.js',
 ]
 
 export default function AnimatedBackgroundLines() {
